@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <!This tag is a comment. Background color set to blue at transparency 80%>
+<body style="color:#F3FDFF; background-color:rgba(9, 56, 149, 0.8);">
+  
+<!######### logoL1 is the text for the WasserTech logo ################>
+  
+  <div class= "logoL1"
+   <p style = "font-family:Copperplate Gothic Light;
+               font-size:32px;
+               font-style:;
+                Color: black;
+               margin: 15px 0px 0px 10px";>
+         Wasser
+
+  <p style = "font-family:Copperplate Gothic Light;
+               font-size:32px;color:lightgreen;
+                 margin: 0px 0px 0px 0px"> Technologies 
+           </p>
+  </div>
+  
+  <!######## End logo text segment ####################>
+  <!instructions:>
+<p>Drag the slider to display the current value.</p>
+
+  <! ###Slider setup: Range can be edited. 
+  Id is "Slider-1" (case sensetive)#######>
+  
+<div id="slidecontainer">
+  <input type="range" min="-255" max="255" value="0" id="Slider-1">
+  <p>Value: <span id="Slider-1_value"></span></p>
+</div>
+  
+  <!##### End slider setup ##########>
+
+  <!##### comms section below ######>
+<script> 
+var slider = document.getElementById("Slider-1");
+var output = document.getElementById("Slider-1_value");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = slider.value;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+  xhttp.open("GET", "http://192.168.2.103:5000/set_speed?speed=" + slider.value, true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
