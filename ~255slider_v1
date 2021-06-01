@@ -34,20 +34,32 @@
   
   <!##### End slider setup ##########>
 
-  <!##### comms section below ######>
+  <!##### comms section below #####>
 <script> 
+ <!---- Grabs HTML element and sends it to python ------- >
+   
 var slider = document.getElementById("Slider-1");
 var output = document.getElementById("Slider-1_value");
 output.innerHTML = slider.value;
-
+  
+<!------ Ends HTML element send ---->
+  
+  <!---- Connection to python. code sets an event to trigger 
+  whenever the sliders is moved because of the "slider.oninput" 
+  line. Every little slide of the slider (in this case, the 
+  input called "range1"), it will make a request to a remote server. -->
+  
 slider.oninput = function() {
   output.innerHTML = slider.value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     }
+    
+    <!-- Vital! IP address is Pi-IP address
+    
   };
-  xhttp.open("GET", "http://192.168.2.103:5000/set_speed?speed=" + slider.value, true);
+  xhttp.open("GET", "http://192.168.1.38:5000/set_speed?speed=" + slider.value, true);
   xhttp.send();
 }
 </script>
